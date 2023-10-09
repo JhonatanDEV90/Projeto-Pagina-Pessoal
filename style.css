@@ -3,6 +3,33 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Estilizando para o modo light (class 'light' do html). Criareia 'variaveis para definição das caracteristicas.*/
+/* Nesse caso, ':root' estaria pegando como elemento a raiz, que seria o html */
+:root {
+    --text-color: white;
+    --bg-url: url(./assets/bg-mobile.jpg);
+    --stroke-color: rgba(255, 255, 255, 0.5);
+    --surface-color: rgba(255, 255, 255, 0.1);
+    --surface-color-hover: rgba(0, 0, 0, 0.02);
+    --highlight-color: rgba(255, 255, 255, 0.2);
+    --switch-bg-url: url(./assets/moon-stars.svg);
+}
+
+/* criando as caracteristicas da classe 'light' definida no html */
+.light {
+    --text-color: black;
+    /* Usando a variavel da imagem de fundo criada no 'root', alterando apenas a imagem*/
+    --bg-url: url(./assets/bg-mobile-light.jpg);
+    --stroke-color: rgba(0, 0, 0, 0.5);
+    --surface-color: rgba(0, 0, 0, 0.05);
+    --surface-color-hover: rgba(255, 255, 255, 0.02);
+    --highlight-color: rgba(0, 0, 0, 0.1);
+    --switch-bg-url: url(./assets/sun.svg);
+    
+    
+}
+
 body {
     /* background-image: url(./assets/bg-mobile.jpg);
     background-repeat: no-repeat;
@@ -11,20 +38,26 @@ body {
 
     /* Fazer de uma forma diferente e mais limpa */
 
-    background: url(./assets/bg-mobile.jpg) no-repeat top center/cover;
+    background: var(--bg-url) no-repeat top center/cover;
 }
 
 body * {
     /* Colocando o tipo e cor da fonte no html */
     font-family: 'Inter', sans-serif;
-    color: white;
+    /* Usando a variavel da cor do texto branca, criada no 'root' */
+    color: var(--text-color);
 }
 
 #container {
     /* Criar uma borda apenas para controle das modificações */
     border: 1px solid red;
+    /* Largura do container */
     width: 360px;
+
     margin: 56px auto 0px;
+
+    /* Aplicando o espaçamento na div com identificador id container*/
+    padding: 0 24px;
 }
 
 #profile {
@@ -34,11 +67,132 @@ body * {
 
 #profile img {
     width: 112px;
-
 }
 
 #profile p {
     font-weight: 500px;
     line-height: 24px;
     margin-top: 8px;
+}
+
+/* Estilizando a caixa do botão */
+#switch {
+    position: relative;
+    width: 64px;
+    margin: 4px auto;
+}
+
+/* Estilizando o botão */
+#switch button {
+    width: 32px;
+    height: 32px;
+    /* Inserindo a imagem do botão */ /* Usando a váriavel do botão criada no 'root' */ 
+    background: white var(--switch-bg-url) no-repeat center;
+    border: 0;
+    border-radius: 50%;
+
+    /* Alinhando o botão a sua caixa */
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+/* Troca do botão para o modeli 'light' ao clicar nele */
+.light #switch button {
+    right: 0;
+    left: initial;
+}
+
+/* Estilizando a caixa do botão */
+#switch span {
+    display: block;
+    width: 64px;
+    height: 24px;
+    background: var(--surface-color); /* Usando a váriavel criada no 'root' */
+    border: 1px solid var(--stroke-color); /* Usando a váriavel criada no 'root' */
+    backdrop-filter: blur(4px);
+    border-radius: 9999px;
+}
+
+/* Links */
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 24px 0;
+}
+
+ul li a{
+    display: flex;
+    /* Alinhamento do texto no eixo  'X'*/
+    justify-content: center;
+    /* Alinhamento dos itens ao centro*/
+    align-items: center;
+    padding: 16px 24px;
+    /* Usando a variavel '-surface-color' criada no 'root' */
+    background: var(--surface-color);
+    border: 1px solid var(--stroke-color);
+    /* Arredondamento da borda */
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    /* Para retirar o underline da lista */
+    text-decoration: none;
+    /* Tamano da fonte */
+    font-weight: 500;
+
+    /* Tempo da transição entre os efeitos (pseudo-selector)*/
+    transition: background 0.2s;
+
+}
+
+/* Mudando comportamento dos botões ao passar o mouse (pseudo-selector) */
+
+ul li a:hover {
+    /* Usando a variavel da cor, criada no 'root' */
+    background: var(--surface-color-hover);
+    /* Usando a variavel da cor do texto branca, criada no 'root' */
+    border: 1.5px solid var(--text-color);
+}
+
+/* Estilizando os icones da página (social-links)*/
+#social-links {
+    /* Alinhaqmento dos itens */
+    display: flex;
+    justify-content: center;
+    
+    /* Espaço dentro da div */
+    padding: 24px 0;
+
+    /* Tamanho dos icones */
+    font-size: 24px;
+}
+
+/* Organizando os icones dentro da caixa */
+#social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 16px;
+    
+     /* Tempo da transição entre os efeitos ao passar o mouse nos icones (pseudo-selector)*/
+    transition: background 0.2s;
+    /* Arredondamento da borda dos icones*/    
+    border-radius: 50%;
+}
+
+/* Estilizando os botões das redes sociais ao passar o mouse */
+/* Usando a variavel criada no 'root' */
+#social-links a:hover{
+    background: var(--highlight-color);
+}
+
+/* Estilizando o footer */
+footer {
+    padding: 24px 0;
+    text-align: center;
+    font-size: 14px;
 }
