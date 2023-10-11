@@ -50,7 +50,7 @@ body * {
 
 #container {
     /* Criar uma borda apenas para controle das modificações */
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* Largura do container */
     width: 360px;
 
